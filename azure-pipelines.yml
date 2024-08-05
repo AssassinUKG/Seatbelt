@@ -27,11 +27,9 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: 'drop'
-    publishLocation: 'Container'
+
+
+- powershell: gci env:* | sort-object name | Format-Table -AutoSize | Out-File $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt
 
 - task: DownloadBuildArtifacts@0
   inputs:
